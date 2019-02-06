@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.icodev76.redditpicswithnavdrawer.R;
 
@@ -26,7 +27,7 @@ public class Fragment_webview extends Fragment {
     private String mParam2;
     //private String url;
 
-    private OnFragmentInteractionListener mListener;
+    //private OnFragmentInteractionListener mListener;
 
     public Fragment_webview() {
         // Required empty public constructor
@@ -57,10 +58,7 @@ public class Fragment_webview extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Bundle bundle= getArguments();
-        if (bundle !=null){
-            url=bundle.getString("options");
-        }
+
     }
 
     @Override
@@ -70,6 +68,11 @@ public class Fragment_webview extends Fragment {
         //View view = inflater.inflate(R.layout.fragment_root_list, container, false);
         View v=inflater.inflate(R.layout.fragment_fragment_webview, container, false);
 
+        Bundle bundle1= getArguments();
+        if (bundle1 !=null){
+            url=bundle1.getString("url_link");
+        }
+        //Toast.makeText(getContext(), "item clicked: "+url, Toast.LENGTH_SHORT).show();
         WebView webView=(WebView)v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
@@ -78,42 +81,6 @@ public class Fragment_webview extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,7 +56,7 @@ public class fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 */
-    private Fragment_webview.OnFragmentInteractionListener mListener;
+    //private Fragment_webview.OnFragmentInteractionListener mListener;
 
     public fragment() {
         // Required empty public constructor
@@ -117,7 +118,7 @@ public class fragment extends Fragment {
             @Override
             public void OnItemClick(int position) {
                 String url=photoList.get(position).getData().getUrl();
-                Toast.makeText(getContext(), "item clicked: "+photoList.get(position).getData().getUrl(), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getContext(), "item clicked: "+url, Toast.LENGTH_SHORT).show();*/
                 callWebViewFragment(url);
             }
         });
@@ -125,31 +126,28 @@ public class fragment extends Fragment {
     }
 
     private void callWebViewFragment(String url) {
-        Fragment myFragment1 = null;
-        Class fragmentClass = null;
-        fragmentClass = Fragment_webview.class;
-        Bundle bundle = new Bundle();
 
-        try {
-            myFragment1 = (Fragment_webview) fragmentClass.newInstance();
-            myFragment1.setArguments(bundle);
+        Bundle bundle1 = new Bundle();
+        bundle1.putString("url_link", url);
 
-        } catch (Exception e) {
-            e.getStackTrace();
-            Log.d(TAG, "callWebViewFragment: "+e);
-        }
-        FragmentManager fragmentManager = getChildFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.weblayout, myFragment1).commit();
+        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+        FragmentTransaction fr= fragmentManager.beginTransaction();
 
-        bundle.putString("options", url);
+        Fragment_webview fragment_webview= new Fragment_webview();
+        fragment_webview.setArguments(bundle1);
+        fr.replace(R.id.framelayout,fragment_webview);
+        fr.commit();
+
+
+        Toast.makeText(getContext(), "item clicked:budle "+bundle1.getString("url_link"), Toast.LENGTH_SHORT).show();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    /*// TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -157,11 +155,7 @@ public class fragment extends Fragment {
 
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+
 
 
     public interface OnFragmentInteractionListener {
