@@ -18,6 +18,11 @@ import com.icodev76.redditpicswithnavdrawer.fragment.fragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+//back press twice to exit app
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
+//-----------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,17 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        //back press twice to exit app
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else { Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show(); }
+
+        mBackPressed = System.currentTimeMillis();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

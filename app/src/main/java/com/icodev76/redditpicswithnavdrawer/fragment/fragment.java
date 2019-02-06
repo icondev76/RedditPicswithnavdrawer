@@ -138,8 +138,6 @@ public class fragment extends Fragment {
         fr.replace(R.id.framelayout,fragment_webview).addToBackStack(null);
         fr.commit();
 
-
-        Toast.makeText(getContext(), "item clicked:budle "+bundle1.getString("url_link"), Toast.LENGTH_SHORT).show();
     }
 
     /*// TODO: Rename method, update argument and hook method into UI event

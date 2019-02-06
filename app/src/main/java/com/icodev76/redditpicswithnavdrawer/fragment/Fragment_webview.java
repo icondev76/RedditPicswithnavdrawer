@@ -65,14 +65,14 @@ public class Fragment_webview extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //View view = inflater.inflate(R.layout.fragment_root_list, container, false);
+        
         View v=inflater.inflate(R.layout.fragment_fragment_webview, container, false);
 
         Bundle bundle1= getArguments();
         if (bundle1 !=null){
             url=bundle1.getString("url_link");
         }
-        //Toast.makeText(getContext(), "item clicked: "+url, Toast.LENGTH_SHORT).show();
+
         WebView webView=(WebView)v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
