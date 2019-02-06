@@ -75,6 +75,8 @@ public class Fragment_webview extends Fragment {
         //Toast.makeText(getContext(), "item clicked: "+url, Toast.LENGTH_SHORT).show();
         WebView webView=(WebView)v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
 

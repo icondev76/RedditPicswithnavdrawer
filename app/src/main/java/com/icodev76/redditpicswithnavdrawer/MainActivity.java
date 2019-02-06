@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
                     e.getStackTrace();
                 }
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.framelayout, myFragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.framelayout, myFragment).addToBackStack(null).commit();
                 menuItem.setChecked(true);
                 setTitle(menuItem.getTitle());
                 String title= (String) menuItem.getTitle();

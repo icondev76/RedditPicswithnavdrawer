@@ -135,7 +135,7 @@ public class fragment extends Fragment {
 
         Fragment_webview fragment_webview= new Fragment_webview();
         fragment_webview.setArguments(bundle1);
-        fr.replace(R.id.framelayout,fragment_webview);
+        fr.replace(R.id.framelayout,fragment_webview).addToBackStack(null);
         fr.commit();
 
 
